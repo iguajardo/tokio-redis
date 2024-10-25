@@ -40,6 +40,11 @@ async fn main() {
             // forever, meanwhile they are used. The reason to use move, is because if a value is
             // borrowed inside the block, that value has to out live the block. Having a 'static
             // type too, or just move it.
+
+            // Send bound
+            // Tasks spawned by `tokio::spawn` must implement Send. This allows the Tokio runtime
+            // to move the tasks between threads while they are suspended at an .await.
+            // More info: https://tokio.rs/tokio/tutorial/spawning
             process(socket).await;
         });
     }
